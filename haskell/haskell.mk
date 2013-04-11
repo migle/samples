@@ -6,6 +6,12 @@
 % : %.lhs
 	ghc -O2 $<
 
+%-p : %-p.hs
+	ghc -O2 -threaded -rtsopts $<
+
+%-p : %-p.lhs
+	ghc -O2 -threaded -rtsopts $<
+
 all : $(PROGS)
 
 clean :
