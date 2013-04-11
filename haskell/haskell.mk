@@ -1,10 +1,10 @@
 # Miguel Ramos, 2013.
 
 % : %.hs
-	ghc -O2 $<
+	ghc -O2 -rtsopts $<
 
 % : %.lhs
-	ghc -O2 $<
+	ghc -O2 -rtsopts $<
 
 %-p : %-p.hs
 	ghc -O2 -threaded -rtsopts $<
