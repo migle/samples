@@ -34,49 +34,44 @@ HL_PKGS?=
 	$(HC) $(HC_OPTS) -S -o $@ $<
 
 %.ll %.o %.hi : %.hs
-	$(HC) $(HC_OPTS) -keep-llvm-file -c $<
+	$(HC) $(HC_OPTS) -fforce-recomp -keep-llvm-file -c $<
 %.ll %.o %.hi : %.lhs
-	$(HC) $(HC_OPTS) -keep-llvm-file -c $<
+	$(HC) $(HC_OPTS) -fforce-recomp -keep-llvm-file -c $<
 
 %.dump-cmm %.o %.hi : %.hs
-	$(HC) $(HC_OPTS) -fforce-recomp -ddump-to-file -ddump-cmm -c $<
+	$(HC) $(HC_OPTS) -ddump-to-file -ddump-cmm -c $<
 %.dump-cmm %.o %.hi : %.lhs
-	$(HC) $(HC_OPTS) -fforce-recomp -ddump-to-file -ddump-cmm -c $<
-
-%.dump-inlinings %.o %.hi : %.hs
-	$(HC) $(HC_OPTS) -fforce-recomp -ddump-to-file -ddump-inlinings -c $<
-%.dump-inlinings %.o %.hi : %.lhs
-	$(HC) $(HC_OPTS) -fforce-recomp -ddump-to-file -ddump-inlinings -c $<
+	$(HC) $(HC_OPTS) -ddump-to-file -ddump-cmm -c $<
 
 %.dump-llvm %.o %.hi : %.hs
-	$(HC) $(HC_OPTS) -fforce-recomp -ddump-to-file -ddump-llvm -c $<
+	$(HC) $(HC_OPTS) -ddump-to-file -ddump-llvm -c $<
 %.dump-llvm %.o %.hi : %.lhs
-	$(HC) $(HC_OPTS) -fforce-recomp -ddump-to-file -ddump-llvm -c $<
+	$(HC) $(HC_OPTS) -ddump-to-file -ddump-llvm -c $<
 
 %.dump-opt-cmm %.o %.hi : %.hs
-	$(HC) $(HC_OPTS) -fforce-recomp -ddump-to-file -ddump-opt-cmm -c $<
+	$(HC) $(HC_OPTS) -ddump-to-file -ddump-opt-cmm -c $<
 %.dump-opt-cmm %.o %.hi : %.lhs
-	$(HC) $(HC_OPTS) -fforce-recomp -ddump-to-file -ddump-opt-cmm -c $<
+	$(HC) $(HC_OPTS) -ddump-to-file -ddump-opt-cmm -c $<
 
 %.dump-prep %.o %.hi : %.hs
-	$(HC) $(HC_OPTS) -fforce-recomp -ddump-to-file -ddump-prep -c $<
+	$(HC) $(HC_OPTS) -ddump-to-file -ddump-prep -c $<
 %.dump-prep %.o %.hi : %.lhs
-	$(HC) $(HC_OPTS) -fforce-recomp -ddump-to-file -ddump-prep -c $<
+	$(HC) $(HC_OPTS) -ddump-to-file -ddump-prep -c $<
 
 %.dump-simpl %.o %.hi : %.hs
-	$(HC) $(HC_OPTS) -fforce-recomp -ddump-to-file -ddump-simpl -c $<
+	$(HC) $(HC_OPTS) -ddump-to-file -ddump-simpl -c $<
 %.dump-simpl %.o %.hi : %.lhs
-	$(HC) $(HC_OPTS) -fforce-recomp -ddump-to-file -ddump-simpl -c $<
+	$(HC) $(HC_OPTS) -ddump-to-file -ddump-simpl -c $<
 
 %.dump-stg %.o %.hi : %.hs
-	$(HC) $(HC_OPTS) -fforce-recomp -ddump-to-file -ddump-stg -c $<
+	$(HC) $(HC_OPTS) -ddump-to-file -ddump-stg -c $<
 %.dump-stg %.o %.hi : %.lhs
-	$(HC) $(HC_OPTS) -fforce-recomp -ddump-to-file -ddump-stg -c $<
+	$(HC) $(HC_OPTS) -ddump-to-file -ddump-stg -c $<
 
 %.dump-stranal %.o %.hi : %.hs
-	$(HC) $(HC_OPTS) -fforce-recomp -ddump-to-file -ddump-stranal -c $<
+	$(HC) $(HC_OPTS) -ddump-to-file -ddump-stranal -c $<
 %.dump-stranal %.o %.hi : %.lhs
-	$(HC) $(HC_OPTS) -fforce-recomp -ddump-to-file -ddump-stranal -c $<
+	$(HC) $(HC_OPTS) -ddump-to-file -ddump-stranal -c $<
 
 all : $(PROGS)
 
