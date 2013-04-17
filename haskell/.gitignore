@@ -1,1 +1,12 @@
+*.hspp
 *.hi
+*.hc
+*.ll
+*.s
+*.dump-cmm
+*.dump-llvm
+*.dump-opt-cmm
+*.dump-prep
+*.dump-simpl
+*.dump-stg
+*.dump-stranal
