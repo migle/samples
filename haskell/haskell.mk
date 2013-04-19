@@ -1,86 +1,99 @@
 # Miguel Ramos, 2013.
-HC?=ghc
-HC_OPTS?=-O2
-HL_OPTS?=-rtsopts
-HC_PAROPTS?=-feager-blackholing
-HL_PAROPTS?=-threaded
-HL_PKGS?=
+HC ?= ghc
+HC_OPTS ?= -O2
+HL_OPTS ?= -rtsopts
+HC_PAROPTS ?= -feager-blackholing
+HL_PAROPTS ?= -threaded
+
+SOURCES ?= $(TARGETS:%=%.hs)
+SOURCES_HS = $(filter %.hs,$(SOURCES))
+SOURCES_LHS = $(filter %.lhs,$(SOURCES))
+
+TARGETS ?= $(SOURCES_LHS:%.lhs=%) $(SOURCES_HS:%.hs=%)
+PACKAGES ?=
+
+COMPILE.hs = $(HC) $(HC_OPTS) -c
+COMPILE-p.hs = $(HC) $(HC_OPTS) $(HC_PAROPTS) -c
+NOASM.hs = $(HC) $(HC_OPTS) -S
+NOASM-p.hs = $(HC) $(HC_OPTS) $(HC_PAROPTS) -S
+LINK.hs = $(HC) $(HC_OPTS) $(HL_OPTS)
+LINK-p.hs = $(HC) $(HC_OPTS) $(HC_PAROPTS) $(HL_OPTS) $(HL_PAROPTS)
 
 %.o %.hi : %.hs
-	$(HC) $(HC_OPTS) -c $<
+	$(COMPILE.hs) $<
 %.o %.hi : %.lhs
-	$(HC) $(HC_OPTS) -c $<
-% %.o %.hi : %.hs
-	$(HC) $(HC_OPTS) $(HL_OPTS) $(HL_PKGS) -o $@ $^
-% %.o %.hi : %.lhs
-	$(HC) $(HC_OPTS) $(HL_OPTS) $(HL_PKGS) -o $@ $^
+	$(COMPILE.hs) $<
 % : %.o
-	$(HC) $(HL_OPTS) $(HL_PKGS) -o $@ $^
+	$(LINK.hs) $^ $(PACKAGES) -o $@
+% %.o %.hi : %.hs
+	$(LINK.hs) $^ $(PACKAGES) -o $@
+% %.o %.hi : %.lhs
+	$(LINK.hs) $^ $(PACKAGES) -o $@
 
 %-p.o %-p.hi : %-p.hs
-	$(HC) $(HC_OPTS) $(HC_PAROPTS) -c $<
+	$(COMPILE-p.hs) $<
 %-p.o %-p.hi : %-p.lhs
-	$(HC) $(HC_OPTS) $(HC_PAROPTS) -c $<
-%-p %-p.o %-p.hi : %-p.hs
-	$(HC) $(HC_OPTS) $(HC_PAROPTS) $(HL_OPTS) $(HL_PAROPTS) $(HL_PKGS) -o $@ $^
-%-p %-p.o %-p.hi : %-p.lhs
-	$(HC) $(HC_OPTS) $(HC_PARTOPS) $(HL_OPTS) $(HL_PAROPTS) $(HL_PKGS) -o $@ $^
+	$(COMPILE-p.hs) $<
 %-p : %-p.o
-	$(HC) $(HL_OPTS) $(HL_PAROPTS) $(HL_PKGS) -o $@ $^
+	$(LINK-p.hs) $^ $(PACKAGES) -o $@
+%-p %-p.o %-p.hi : %-p.hs
+	$(LINK-p.hs) $^ $(PACKAGES) -o $@
+%-p %-p.o %-p.hi : %-p.lhs
+	$(LINK-p.hs) $^ $(PACKAGES) -o $@
 
 %.s : %.hs
-	$(HC) $(HC_OPTS) -S -o $@ $<
+	$(NOASM) $<
 %.s : %.lhs
-	$(HC) $(HC_OPTS) -S -o $@ $<
+	$(NOASM) $<
 
 %.ll %.o %.hi : %.hs
-	$(HC) $(HC_OPTS) -fforce-recomp -keep-llvm-file -c $<
+	$(COMPILE.hs) -fforce-recomp -keep-llvm-file $<
 %.ll %.o %.hi : %.lhs
-	$(HC) $(HC_OPTS) -fforce-recomp -keep-llvm-file -c $<
+	$(COMPILE.hs) -fforce-recomp -keep-llvm-file $<
 
 %.dump-cmm %.o %.hi : %.hs
-	$(HC) $(HC_OPTS) -ddump-to-file -ddump-cmm -c $<
+	$(COMPILE.hs) -ddump-to-file -ddump-cmm $<
 %.dump-cmm %.o %.hi : %.lhs
-	$(HC) $(HC_OPTS) -ddump-to-file -ddump-cmm -c $<
+	$(COMPILE.hs) -ddump-to-file -ddump-cmm $<
 
 %.dump-llvm %.o %.hi : %.hs
-	$(HC) $(HC_OPTS) -ddump-to-file -ddump-llvm -c $<
+	$(COMPILE.hs) -ddump-to-file -ddump-llvm $<
 %.dump-llvm %.o %.hi : %.lhs
-	$(HC) $(HC_OPTS) -ddump-to-file -ddump-llvm -c $<
+	$(COMPILE.hs) -ddump-to-file -ddump-llvm $<
 
 %.dump-opt-cmm %.o %.hi : %.hs
-	$(HC) $(HC_OPTS) -ddump-to-file -ddump-opt-cmm -c $<
+	$(COMPILE.hs) -ddump-to-file -ddump-opt-cmm $<
 %.dump-opt-cmm %.o %.hi : %.lhs
-	$(HC) $(HC_OPTS) -ddump-to-file -ddump-opt-cmm -c $<
+	$(COMPILE.hs) -ddump-to-file -ddump-opt-cmm $<
 
 %.dump-prep %.o %.hi : %.hs
-	$(HC) $(HC_OPTS) -ddump-to-file -ddump-prep -c $<
+	$(COMPILE.hs) -ddump-to-file -ddump-prep $<
 %.dump-prep %.o %.hi : %.lhs
-	$(HC) $(HC_OPTS) -ddump-to-file -ddump-prep -c $<
+	$(COMPILE.hs) -ddump-to-file -ddump-prep $<
 
 %.dump-simpl %.o %.hi : %.hs
-	$(HC) $(HC_OPTS) -ddump-to-file -ddump-simpl -c $<
+	$(COMPILE.hs) -ddump-to-file -ddump-simpl $<
 %.dump-simpl %.o %.hi : %.lhs
-	$(HC) $(HC_OPTS) -ddump-to-file -ddump-simpl -c $<
+	$(COMPILE.hs) -ddump-to-file -ddump-simpl $<
 
 %.dump-stg %.o %.hi : %.hs
-	$(HC) $(HC_OPTS) -ddump-to-file -ddump-stg -c $<
+	$(COMPILE.hs) -ddump-to-file -ddump-stg $<
 %.dump-stg %.o %.hi : %.lhs
-	$(HC) $(HC_OPTS) -ddump-to-file -ddump-stg -c $<
+	$(COMPILE.hs) -ddump-to-file -ddump-stg $<
 
 %.dump-stranal %.o %.hi : %.hs
-	$(HC) $(HC_OPTS) -ddump-to-file -ddump-stranal -c $<
+	$(COMPILE.hs) -ddump-to-file -ddump-stranal $<
 %.dump-stranal %.o %.hi : %.lhs
-	$(HC) $(HC_OPTS) -ddump-to-file -ddump-stranal -c $<
+	$(COMPILE.hs) -ddump-to-file -ddump-stranal $<
 
-all : $(PROGS)
+all : $(TARGETS)
 
 clean :
-	@$(RM) -v $(PROGS)
-	@$(RM) -v $(PROGS:%=%.hspp)
-	@$(RM) -v $(PROGS:%=%.hc)
-	@$(RM) -v $(PROGS:%=%.hi)
-	@$(RM) -v $(PROGS:%=%.o)
-	@$(RM) -v $(PROGS:%=%.s)
-	@$(RM) -v $(PROGS:%=%.ll)
-	@$(RM) -v $(PROGS:%=%.dump-*)
+	@$(RM) -v $(TARGETS)
+	@$(RM) -v $(SOURCES_HS:%.hs=%.hspp) $(SOURCES_LHS:%.lhs=%.hspp)
+	@$(RM) -v $(SOURCES_HS:%.hs=%.hc) $(SOURCES_LHS:%.lhs=%.hc)
+	@$(RM) -v $(SOURCES_HS:%.hs=%.hi) $(SOURCES_LHS:%.lhs=%.hi)
+	@$(RM) -v $(SOURCES_HS:%.hs=%.o) $(SOURCES_LHS:%.lhs=%.o)
+	@$(RM) -v $(SOURCES_HS:%.hs=%.s) $(SOURCES_LHS:%.lhs=%.s)
+	@$(RM) -v $(SOURCES_HS:%.hs=%.ll) $(SOURCES_LHS:%.lhs=%.ll)
+	@$(RM) -v $(SOURCES_HS:%.hs=%.dump-*) $(SOURCES_LHS:%.lhs=%.dump-*)
