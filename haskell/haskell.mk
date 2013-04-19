@@ -42,9 +42,9 @@ LINK-p.hs = $(HC) $(HC_OPTS) $(HC_PAROPTS) $(HL_OPTS) $(HL_PAROPTS)
 	$(LINK-p.hs) $^ $(PACKAGES) -o $@
 
 %.s : %.hs
-	$(NOASM) $<
+	$(NOASM.hs) $<
 %.s : %.lhs
-	$(NOASM) $<
+	$(NOASM.hs) $<
 
 %.ll %.o %.hi : %.hs
 	$(COMPILE.hs) -fforce-recomp -keep-llvm-file $<
