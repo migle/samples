@@ -3,5 +3,5 @@
 module AckPhi (ack) where
 
 ack :: (Integer -> Integer -> Integer -> Integer ) -> Integer -> Integer -> Integer
-ack phi 0 y = y + 1
-ack phi x y = (phi (x - 1) (y + 3) 2) - 3
+ack phi 0 n = n + 1
+ack phi m n = (phi 2 (n + 3) (m - 1)) - 3
