@@ -5,6 +5,7 @@ module Main (main) where
 import qualified AckNaive as N (ack)
 import qualified AckCheat as C (ack)
 import qualified AckGExp as G (ack)
+import qualified AckList as L (ack)
 
 import qualified GExpDefinition as GD (gexp)
 import qualified GExpComposition as GC (gexp)
@@ -25,3 +26,5 @@ main = do
       putStrLn $ show $ G.ack GC.gexp x y
     [ "exp-list", arg1, arg2 ] | x <- read arg1, y <- read arg2 ->
       putStrLn $ show $ G.ack GL.gexp x y
+    [ "list", arg1, arg2 ] | x <- read arg1, y <- read arg2 ->
+      putStrLn $ show $ L.ack x y
