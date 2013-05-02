@@ -3,6 +3,7 @@
 module Main (main) where
 
 import qualified AckNaive as N (ack)
+import qualified AckCheat as C (ack)
 import qualified AckGExp as G (ack)
 
 import qualified GExpDefinition as GD (gexp)
@@ -16,6 +17,8 @@ main = do
   case args of
     [ "naive", arg1, arg2 ] | x <- read arg1, y <- read arg2 ->
       putStrLn $ show $ N.ack x y
+    [ "cheat", arg1, arg2 ] | x <- read arg1, y <- read arg2 ->
+      putStrLn $ show $ C.ack x y
     [ "exp", arg1, arg2 ] | x <- read arg1, y <- read arg2 ->
       putStrLn $ show $ G.ack GD.gexp x y
     [ "exp-composition", arg1, arg2 ] | x <- read arg1, y <- read arg2 ->
