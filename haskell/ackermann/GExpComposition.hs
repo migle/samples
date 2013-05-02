@@ -11,5 +11,5 @@ gexp 0 n a = a + n
 gexp 1 n a = a * n
 gexp 2 n a = a ^ n
 gexp m 0 a = 1
-gexp m n a = let g = gexp (m - 1) a
+gexp m n a = let g = \ x -> gexp (m - 1) x a
              in c g (n - 1) a
