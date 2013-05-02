@@ -1,6 +1,6 @@
 -- Miguel Ramos, 2013.
 
-module AckList (ack) where
+module AckList (ack, ackFast) where
 
 ackermann = iterate ack [1..] where
    ack a = s where
@@ -9,3 +9,5 @@ ackermann = iterate ack [1..] where
            aa = drop b a
 
 ack x y = ackermann !! x !! y
+
+ackFast x y = ackermann !! x !! y
