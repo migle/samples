@@ -1,10 +1,11 @@
 # Miguel Ramos, 2013.
-SOURCES = Ack.hs AckNaive.hs AckExp.hs
-TARGETS = ack
-
-ack : Ack.o AckNaive.o AckExp.o
-	$(LINK.hs) $^ $(PACKAGES) -o $@
-
-Ack.o : Ack.hs AckNaive.hi AckExp.hi
+DEPS = AckNaive.hs AckGExp.hs GExpDefinition.hs GExpComposition.hs GExpList.hs
+SOURCES = ack.hs gexp.hs $(DEPS)
+TARGETS = ack gexp
 
 include ../haskell.mk
+
+ack.o : ack.hs $(DEPS:%.hs=%.hi)
+ack : ack.o $(DEPS:%.hs=%.o)
+gexp.o : gexp.hs $(DEPS:%.hs=%.hi)
+gexp : gexp.o $(DEPS:%.hs=%.o)
