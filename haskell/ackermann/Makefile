@@ -1,6 +1,6 @@
 # Miguel Ramos, 2013.
 DEPS = AckNaive.hs AckCheat.hs AckGExp.hs AckList.hs AckCPS.hs \
-       GExpDefinition.hs GExpComposition.hs GExpList.hs
+       GExpDefinition.hs GExpComposition.hs GExpList.hs GExpSComposition.hs
 SOURCES = ack.hs gexp.hs $(DEPS)
 TARGETS = ack gexp
 
