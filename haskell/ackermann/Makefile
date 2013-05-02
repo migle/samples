@@ -1,5 +1,5 @@
 # Miguel Ramos, 2013.
-DEPS = AckRecursive.hs AckCPS.hs AckPhi.hs AckList.hs \
+DEPS = AckRecursive.hs AckCPS.hs AckPhi.hs AckList.hs AckHigher.hs \
        PhiRecursive.hs PhiList.hs PhiComposition.hs
 SOURCES = ack.hs phi.hs $(DEPS)
 TARGETS = ack phi

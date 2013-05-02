@@ -6,6 +6,7 @@ import qualified AckRecursive as R (ack, ackFast)
 import qualified AckCPS as C (ack, ackFast)
 import qualified AckPhi as P (ack)
 import qualified AckList as L (ack, ackFast)
+import qualified AckHigher as H (ack, ackFast)
 
 import qualified PhiRecursive as PR (phi, phiFast)
 import qualified PhiList as PL (phi, phiFast)
@@ -43,3 +44,9 @@ main = do
       putStrLn $ show $ L.ack x y
     [ "list+", arg1, arg2 ] | x <- read arg1, y <- read arg2 ->
       putStrLn $ show $ L.ackFast x y
+
+    [ "higher", arg1, arg2 ] | x <- read arg1, y <- read arg2 ->
+      putStrLn $ show $ H.ack x y
+    [ "higher+", arg1, arg2 ] | x <- read arg1, y <- read arg2 ->
+      putStrLn $ show $ H.ackFast x y
+
