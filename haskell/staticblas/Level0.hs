@@ -7,8 +7,8 @@ module Level0 where
 import GHC.TypeLits
 
 -- Types v and s form a CoordinateSpace when (v n s) is a type for n-tuples of elements each, called
--- a coordinate, of type -- s, the scalar field. In this case, the vector type constructor v has
--- kind Nat -> * -> k, where k is the kind of the scalar type s.
+-- a coordinate, of type s, the scalar field. In this case, the vector type constructor v has kind
+-- Nat -> * -> k, where k is the kind of the scalar type s.
 -- For a CoordinateSpace, operations dim, coord and operator (!) are available for obtaining the
 -- dimension of the vector space and the n'th coordinate of a vector.
 class CoordinateSpace v s | v -> s where
