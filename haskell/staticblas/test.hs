@@ -1,5 +1,6 @@
 -- Miguel Ramos, 2013.
-{-# LANGUAGE DataKinds, OverlappingInstances #-}
+{-# LANGUAGE DataKinds #-}
+--{-# LANGUAGE DataKinds, OverlappingInstances #-}
 
 module Main (main) where
 
@@ -21,17 +22,17 @@ b = (FMatrix (\ i j -> i + 3*j))::(FMatrix 3 3 Int)
 c = (FMatrix (\ i j -> if (i == j) then 1 else 0))::(FMatrix 3 2 Int)
 
 main = do
-    putStrLn $ (show zero) ++ " of size " ++ (show $ dim zero)
-    putStrLn $ show ones
-    putStrLn $ show u0
-    putStrLn $ show u1
-    putStrLn $ show u2
-    putStrLn $ show x
-    putStrLn $ show $ x == zero
-    putStrLn $ show $ x == ones
-    putStrLn $ show $ x == u0
-    putStrLn $ show $ x == u1
-    putStrLn $ show $ x == u2
+--    putStrLn $ (show zero) ++ " of size " ++ (show $ dim zero)
+--    putStrLn $ show ones
+--    putStrLn $ show u0
+--    putStrLn $ show u1
+--    putStrLn $ show u2
+--    putStrLn $ show x
+--    putStrLn $ show $ x == zero
+--    putStrLn $ show $ x == ones
+--    putStrLn $ show $ x == u0
+--    putStrLn $ show $ x == u1
+--    putStrLn $ show $ x == u2
 
     putStrLn $ show id3
     putStrLn $ show a
