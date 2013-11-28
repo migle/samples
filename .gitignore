@@ -1,4 +1,5 @@
 html/
 latex/
 *.[ao]
+.*.sw[a-p]
 core
