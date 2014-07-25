@@ -25,38 +25,38 @@ void saxpy_kernel(float a, float x, float y, float& z)
 
 // (Int -> a -> b -> c) -> a -> (Int -> b -> c)
 // (Int -> b -> c) -> b -> (Int -> c)
-template < class Func, class Head, class... Tail >
+template < class Func, class Head >
 struct partial_closure
 {
     Func func;
-    Head&& head;
+    Head head;
     partial_closure(Func func_, Head&& head_)
         : func(func_), head(head_) {}
-    template < class It >
+    template < class It, class... Tail >
         void operator () (It i, Tail&&... tail) const
             { func(i, head, tail...); }
 };
 
-template < class Func, class Head, class... Tail >
-struct partial_closure< Func, std::vector<Head>&, Tail&&... >
+template < class Func, class Head >
+struct partial_closure< Func, std::vector<Head>& >
 {
     Func func;
     std::vector<Head>& head;
     partial_closure(Func func_, std::vector<Head>& head_)
         : func(func_), head(head_) {}
-    template < class It >
+    template < class It, class... Tail >
         void operator () (It i, Tail&&... tail) const
             { func(i, head[i], tail...); }
 };
 
-template < class Func, class Head, class... Tail >
-struct partial_closure< Func, std::vector<Head> const&, Tail&&... >
+template < class Func, class Head >
+struct partial_closure< Func, std::vector<Head> const& >
 {
     Func func;
     std::vector<Head> const& head;
     partial_closure(Func func_, std::vector<Head> const& head_)
         : func(func_), head(head_) {}
-    template < class It >
+    template < class It, class... Tail >
         void operator () (It i, Tail&&... tail) const
             { func(i, head[i], tail...); }
 };
@@ -65,14 +65,14 @@ template < class Func, class Head >
     inline partial_closure< Func, Head >
         bind(Func func, Head&& head)
 {
-    return partial_closure< Func, Head&& >(func, head);
+    return partial_closure< Func, Head >(func, head);
 }
 
 template < class Func, class Head, class... Tail >
     inline auto bind(Func func, Head&& head, Tail&&... tail)
-        -> decltype(bind(partial_closure< Func, Head&& >(func, head), tail...))
+        -> decltype(bind(partial_closure< Func, Head >(func, head), tail...))
 {
-    return bind(partial_closure< Func, Head&& >(func, head), tail...);
+    return bind(partial_closure< Func, Head >(func, head), tail...);
 }
 
 template < class Closure >
