@@ -6,6 +6,7 @@ import qualified FiboNaive as N (fib)
 import qualified FiboTail as T (fib)
 import qualified FiboList as L (fib, fibs)
 import qualified FiboPair as P (fib)
+import qualified FiboST as S (fib)
 
 import System.Environment (getArgs)
 
@@ -30,3 +31,7 @@ main = do
       putStrLn $ show $ P.fib n
     [ "pair", arg1, arg2 ] | i <- read arg1, f <- read arg2 ->
       putStrLn $ show $ take f $ drop i $ fibs P.fib
+    [ "st", arg ] | n <- read arg ->
+      putStrLn $ show $ S.fib n
+    [ "st", arg1, arg2 ] | i <- read arg1, f <- read arg2 ->
+      putStrLn $ show $ take f $ drop i $ fibs S.fib
