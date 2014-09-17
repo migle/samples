@@ -1,4 +1,4 @@
-# Miguel Ramos, 2013.
+# Miguel Ramos, 2014.
 SOURCES ?= $(TARGETS:%=%.hs)
 SOURCES_HS = $(filter %.hs,$(SOURCES))
 SOURCES_LHS = $(filter %.lhs,$(SOURCES))
@@ -7,18 +7,18 @@ TARGETS ?= $(SOURCES_LHS:%.lhs=%) $(SOURCES_HS:%.hs=%)
 PACKAGES ?=
 
 HC ?= ghc
+HC_PACKAGES = $(foreach pkg,$(PACKAGES),-package $(pkg))
 HC_OPTS ?= -O2
 HL_OPTS ?= -rtsopts
 HC_PAROPTS ?= -feager-blackholing
 HL_PAROPTS ?= -threaded
-HL_PACKAGES = $(foreach pkg,$(PACKAGES),-package $(pkg))
 
-COMPILE.hs = $(HC) $(HC_OPTS) -c
-COMPILE-p.hs = $(HC) $(HC_OPTS) $(HC_PAROPTS) -c
-NOASM.hs = $(HC) $(HC_OPTS) -S
-NOASM-p.hs = $(HC) $(HC_OPTS) $(HC_PAROPTS) -S
-LINK.hs = $(HC) $(HC_OPTS) $(HL_OPTS) $(HL_PACKAGES)
-LINK-p.hs = $(HC) $(HC_OPTS) $(HC_PAROPTS) $(HL_OPTS) $(HL_PAROPTS) $(HL_PACKAGES)
+COMPILE.hs = $(HC) $(HC_PACKAGES) $(HC_OPTS) -c
+COMPILE-p.hs = $(HC) $(HC_PACKAGES) $(HC_OPTS) $(HC_PAROPTS) -c
+NOASM.hs = $(HC) $(HC_PACKAGES) $(HC_OPTS) -S
+NOASM-p.hs = $(HC) $(HC_PACKAGES) $(HC_OPTS) $(HC_PAROPTS) -S
+LINK.hs = $(HC) $(HC_PACKAGES) $(HC_OPTS) $(HL_OPTS)
+LINK-p.hs = $(HC) $(HC_PACKAGES) $(HC_OPTS) $(HC_PAROPTS) $(HL_OPTS) $(HL_PAROPTS)
 
 %.o %.hi : %.hs
 	$(COMPILE.hs) $<
