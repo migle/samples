@@ -1,5 +1,5 @@
 # Miguel Ramos, 2014.
-SOURCES = pairs.hs tak.hs
+SOURCES = pairs.hs pairs-distilled.hs tak.hs
 TARGETS = pairs tak
 HC_OPTS = -O2 -feager-blackholing
 HL_OPTS = -rtsopts -threaded
