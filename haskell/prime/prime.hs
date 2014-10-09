@@ -1,14 +1,17 @@
 -- Miguel Ramos, 2014.
 
-import Control.Parallel
 import System.Environment (getArgs)
 
 primes = 2 : 3 : 5 : 7 : [ n | n <- [11..], isPrime n ]
 
-divisible n (p:ps) | n >= p * p = rem n p /= 0
-                   | otherwise  = let byHead = rem n p /= 0
-                                      byTail = divisible n ps
-                                  in byTail `par` (byHead `pseq` (byHead || byTail))
+divisible n (p:ps) = let (q,r) = quotRem n p
+                     in if r == 0 then
+                           True
+                        else
+                           if q < p then
+                              False
+                           else
+                              divisible n ps
 
 isPrime n | n <= 1    = False
           | otherwise = not (divisible n primes)
