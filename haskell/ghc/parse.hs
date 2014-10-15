@@ -17,7 +17,11 @@ parse pathname =
         runGhc (Just libdir) $ do
             flags <- getSessionDynFlags
             setSessionDynFlags flags
+
             target <- guessTarget pathname Nothing
-            setTargets [target]
-            load LoadAllTargets
-            return $! showSDoc flags (ppr target)
+            addTarget target
+
+            moduleGraph <- depanal [] False
+            parsed <- mapM parseModule moduleGraph
+
+            return $! showSDoc flags (ppr parsed)
