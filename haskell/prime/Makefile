@@ -1,13 +1,14 @@
 # Miguel Ramos, 2014.
-SOURCES = prime.hs sieve.hs
-TARGETS = prime sieve
+SOURCES = prime.hs sieve.hs sieve-array.hs sieve-lazy.hs
+TARGETS = prime sieve sieve-array sieve-lazy
 HC_OPTS = -O2 -feager-blackholing
 HL_OPTS = -rtsopts -threaded
 
 all : prime sieve
-prime : prime.o
-prime.o : prime.hs
-sieve : sieve.o
-sieve.o : sieve.hs
+
+prime : prime.hs
+sieve : sieve.hs
+sieve-array : sieve-array.hs
+sieve-lazy : sieve-lazy.hs
 
 include ../haskell.mk
