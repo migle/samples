@@ -1,10 +1,8 @@
 -- Miguel Ramos, 2014.
--- From O'Neil, "The Genuine Sieve of Eratosthenes", page 1.
 
 import System.Environment (getArgs)
 
-primes = sieve [ 2 .. ]
-sieve (p:xs) = p : sieve [ x | x <- xs, x `mod` p /= 0 ]
+primes = [ i * log i | i <- [ 2 .. ] ]
 
 main = do
   args <- getArgs
@@ -15,5 +13,3 @@ main = do
         | n <- read arg1 -> print $ take n primes
     [ "take", arg1, arg2 ]
         | d <- read arg1, n <- read arg2 -> print $ take n $ drop d primes
-    [ "upto", arg1 ]
-        | n <- read arg1 -> print $ sieve [ 2 .. n ]
