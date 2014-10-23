@@ -6,5 +6,6 @@ HL_OPTS = -rtsopts -threaded
 
 all : $(TARGETS)
 stg : $(SOURCES:%.hs=%.dump-stg)
+prep : $(SOURCES:%.hs=%.dump-prep)
 
 include ../haskell.mk
