@@ -1,122 +1,94 @@
+-- vim: ft=haskell:
 
-Pairs.$wpairs :: GHC.Prim.Int# -> [(GHC.Types.Int, GHC.Types.Int)]
-[GblId, Arity=1, Caf=NoCafRefs, Str=DmdType <L,U>, Unf=OtherCon []] =
-    \r srt:SRT:[] [ww_s17c]
-        case ># [1 ww_s17c] of sat_s17d {
-          __DEFAULT ->
-              case tagToEnum# [sat_s17d] of _ [Occ=Dead] {
-                GHC.Types.False ->
-                    let {
-                      go_s17f [Occ=LoopBreaker] :: GHC.Prim.Int# -> [(GHC.Types.Int, GHC.Types.Int)]
-                      [LclId, Arity=1, Str=DmdType <L,U>, Unf=OtherCon []] =
-                          sat-only \r srt:SRT:[] [x_s17g]
-                              case +# [x_s17g 1] of x0_s17h {
-                                __DEFAULT ->
-                                    let {
-                                      n_s17i [Occ=OnceL*] :: [(GHC.Types.Int, GHC.Types.Int)]
-                                      [LclId, Str=DmdType] =
-                                          \u srt:SRT:[] []
-                                              case ==# [x_s17g ww_s17c] of sat_s17j {
-                                                __DEFAULT ->
-                                                    case tagToEnum# [sat_s17j] of _ [Occ=Dead] {
+Pairs.$wpairs :: GHC.Prim.Int# -> [(GHC.Types.Int, GHC.Types.Int)] =
+  \r [ww_s17c]
+    case ># [1 ww_s17c] of sat_s17d {
+      __DEFAULT ->
+        case tagToEnum# [sat_s17d] of _ {
+          GHC.Types.False ->
+            let {
+              go_s17f :: GHC.Prim.Int# -> [(GHC.Types.Int, GHC.Types.Int)] =
+                \r [x_s17g]
+                  case +# [x_s17g 1] of x0_s17h {
+                    __DEFAULT ->
+                      let {
+                        n_s17i :: [(GHC.Types.Int, GHC.Types.Int)] =
+                          \u []
+                            case ==# [x_s17g ww_s17c] of sat_s17j {
+                              __DEFAULT ->
+                                case tagToEnum# [sat_s17j] of _ {
+                                  GHC.Types.False ->
+                                    case +# [x_s17g 1] of sat_s17l {
+                                      __DEFAULT -> go_s17f sat_s17l;
+                                    };
+                                  GHC.Types.True -> [] [];
+                                };
+                            };
+                      }
+                      in case ># [x0_s17h ww_s17c] of sat_s17m {
+                           __DEFAULT ->
+                             case tagToEnum# [sat_s17m] of _ {
+                               GHC.Types.False ->
+                                 let { wild2_s17o :: GHC.Types.Int = GHC.Types.I#! [x_s17g]; }
+                                 in let {
+                                      go1_s17p :: GHC.Prim.Int# -> [(GHC.Types.Int, GHC.Types.Int)] =
+                                        \r [x1_s17q]
+                                          let {
+                                            sat_s17w :: [(GHC.Types.Int, GHC.Types.Int)] =
+                                              \u []
+                                                case ==# [x1_s17q ww_s17c] of sat_s17t {
+                                                  __DEFAULT ->
+                                                    case tagToEnum# [sat_s17t] of _ {
                                                       GHC.Types.False ->
-                                                          case +# [x_s17g 1] of sat_s17l {
-                                                            __DEFAULT -> go_s17f sat_s17l;
-                                                          };
-                                                      GHC.Types.True -> [] [];
+                                                        case +# [x1_s17q 1] of sat_s17v {
+                                                          __DEFAULT -> go1_s17p sat_s17v;
+                                                        };
+                                                      GHC.Types.True -> n_s17i;
                                                     };
-                                              };
-                                    } in 
-                                      case ># [x0_s17h ww_s17c] of sat_s17m {
-                                        __DEFAULT ->
-                                            case tagToEnum# [sat_s17m] of _ [Occ=Dead] {
-                                              GHC.Types.False ->
-                                                  let {
-                                                    wild2_s17o [Occ=OnceL] :: GHC.Types.Int
-                                                    [LclId, Str=DmdType m, Unf=OtherCon []] =
-                                                        NO_CCS GHC.Types.I#! [x_s17g]; } in
-                                                  let {
-                                                    go1_s17p [Occ=LoopBreaker]
-                                                      :: GHC.Prim.Int#
-                                                         -> [(GHC.Types.Int, GHC.Types.Int)]
-                                                    [LclId, Arity=1, Str=DmdType <L,U>, Unf=OtherCon []] =
-                                                        sat-only \r srt:SRT:[] [x1_s17q]
-                                                            let {
-                                                              sat_s17w [Occ=Once] :: [(GHC.Types.Int, GHC.Types.Int)]
-                                                              [LclId, Str=DmdType] =
-                                                                  \u srt:SRT:[] []
-                                                                      case
-                                                                          ==# [x1_s17q ww_s17c]
-                                                                      of
-                                                                      sat_s17t
-                                                                      { __DEFAULT ->
-                                                                            case
-                                                                                tagToEnum# [sat_s17t]
-                                                                            of
-                                                                            _ [Occ=Dead]
-                                                                            { GHC.Types.False ->
-                                                                                  case
-                                                                                      +# [x1_s17q 1]
-                                                                                  of
-                                                                                  sat_s17v
-                                                                                  { __DEFAULT ->
-                                                                                        go1_s17p
-                                                                                            sat_s17v;
-                                                                                  };
-                                                                              GHC.Types.True ->
-                                                                                  n_s17i;
-                                                                            };
-                                                                      }; } in
-                                                            let {
-                                                              sat_s17r [Occ=Once] :: GHC.Types.Int
-                                                              [LclId, Str=DmdType] =
-                                                                  NO_CCS GHC.Types.I#! [x1_s17q]; } in
-                                                            let {
-                                                              sat_s17s [Occ=Once] :: (GHC.Types.Int, GHC.Types.Int)
-                                                              [LclId, Str=DmdType] =
-                                                                  NO_CCS (,)! [wild2_s17o sat_s17r];
-                                                            } in  : [sat_s17s sat_s17w];
-                                                  } in  go1_s17p x0_s17h;
-                                              GHC.Types.True -> n_s17i;
-                                            };
-                                      };
-                              };
-                    } in  go_s17f 1;
-                GHC.Types.True -> [] [];
-              };
+                                                };
+                                          }
+                                          in let { sat_s17r :: GHC.Types.Int = GHC.Types.I#! [x1_s17q]; }
+                                             in let {
+                                                  sat_s17s :: (GHC.Types.Int, GHC.Types.Int) = (,)! [wild2_s17o sat_s17r];
+                                                }
+                                                in : [sat_s17s sat_s17w];
+                                 }
+                                 in go1_s17p x0_s17h;
+                               GHC.Types.True -> n_s17i;
+                             };
+                         };
+                  };
+            }
+            in go_s17f 1;
+          GHC.Types.True -> [] [];
         };
-Pairs.pairs [InlPrag=INLINE[0]] :: GHC.Types.Int -> [(GHC.Types.Int, GHC.Types.Int)]
-[GblId, Arity=1, Caf=NoCafRefs, Str=DmdType <S,1*U(U)>, Unf=OtherCon []] =
-    \r srt:SRT:[] [w_s17x]
-        case w_s17x of _ [Occ=Dead] {
-          GHC.Types.I# ww1_s17z [Occ=Once] -> Pairs.$wpairs ww1_s17z;
-        };
-Pairs.sumPairs1 :: (GHC.Types.Int, GHC.Types.Int) -> GHC.Types.Int
-[GblId, Arity=1, Caf=NoCafRefs, Str=DmdType <S(SS),1*U(1*U(U),1*U(U))>m, Unf=OtherCon []] =
-    \r srt:SRT:[] [ds_s17A]
-        case ds_s17A of _ [Occ=Dead] {
-          (,) a_s17C [Occ=Once] b_s17D [Occ=Once] ->
-              GHC.Num.$fNumInt_$c+ a_s17C b_s17D;
-        };
-Pairs.sumPairs :: GHC.Types.Int -> GHC.Types.Int
-[GblId, Arity=1, Caf=NoCafRefs, Str=DmdType <S,1*U(U)>m, Unf=OtherCon []] =
-    \r srt:SRT:[] [x_s17E]
-        case x_s17E of _ [Occ=Dead] {
-          GHC.Types.I# ww1_s17G [Occ=Once] ->
-              case Pairs.$wpairs ww1_s17G of sat_s17H {
-                __DEFAULT ->
-                    case GHC.Base.map Pairs.sumPairs1 sat_s17H of sat_s17I {
-                      __DEFAULT -> Data.List.sum_$ssum1 sat_s17I;
-                    };
-              };
-        };
-Pairs.nPairs :: GHC.Types.Int -> GHC.Types.Int
-[GblId, Arity=1, Caf=NoCafRefs, Str=DmdType <S,1*U(U)>m, Unf=OtherCon []] =
-    \r srt:SRT:[] [x_s17J]
-        case Pairs.pairs x_s17J of sat_s17K {
+    };
+Pairs.pairs :: GHC.Types.Int -> [(GHC.Types.Int, GHC.Types.Int)] =
+  \r [w_s17x]
+    case w_s17x of _ {
+      GHC.Types.I# ww1_s17z -> Pairs.$wpairs ww1_s17z;
+    };
+Pairs.sumPairs1 :: (GHC.Types.Int, GHC.Types.Int) -> GHC.Types.Int =
+  \r [ds_s17A]
+    case ds_s17A of _ {
+      (,) a_s17C b_s17D -> GHC.Num.$fNumInt_$c+ a_s17C b_s17D;
+    };
+Pairs.sumPairs :: GHC.Types.Int -> GHC.Types.Int =
+  \r [x_s17E]
+    case x_s17E of _ {
+      GHC.Types.I# ww1_s17G ->
+        case Pairs.$wpairs ww1_s17G of sat_s17H {
           __DEFAULT ->
-              case GHC.List.$wlenAcc sat_s17K 0 of ww_s17L {
-                __DEFAULT -> GHC.Types.I# [ww_s17L];
-              };
+            case GHC.Base.map Pairs.sumPairs1 sat_s17H of sat_s17I {
+              __DEFAULT -> Data.List.sum_$ssum1 sat_s17I;
+            };
         };
-
+    };
+Pairs.nPairs :: GHC.Types.Int -> GHC.Types.Int =
+  \r [x_s17J]
+    case Pairs.pairs x_s17J of sat_s17K {
+      __DEFAULT ->
+        case GHC.List.$wlenAcc sat_s17K 0 of ww_s17L {
+          __DEFAULT -> GHC.Types.I# [ww_s17L];
+        };
+    };
