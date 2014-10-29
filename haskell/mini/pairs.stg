@@ -52,8 +52,8 @@ Pairs.$wpairs :: GHC.Prim.Int# -> [(GHC.Types.Int, GHC.Types.Int)] =
                                                   sat_s17s :: (GHC.Types.Int, GHC.Types.Int) = (,)! [wild2_s17o sat_s17r];
                                                 }
                                                 in : [sat_s17s sat_s17w];
-                                 }
-                                 in go1_s17p x0_s17h;
+                                    }
+                                    in go1_s17p x0_s17h;
                                GHC.Types.True -> n_s17i;
                              };
                          };
