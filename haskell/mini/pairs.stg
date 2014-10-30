@@ -92,3 +92,72 @@ Pairs.nPairs :: GHC.Types.Int -> GHC.Types.Int =
           __DEFAULT -> GHC.Types.I# [ww_s17L];
         };
     };
+baseSums_r1yq :: GHC.Types.Int -> GHC.Types.Int =
+  \r [x_s6hn]
+    case x_s6hn of _ {
+      GHC.Types.I# y_s6hp ->
+        case ># [1 y_s6hp] of sat_s6hq {
+          __DEFAULT ->
+            case tagToEnum# [sat_s6hq] of _ {
+              GHC.Types.False ->
+                let {
+                  go_s6hs GHC.Prim.Int# -> [GHC.Types.Int] =
+                    \r [x1_s6ht]
+                      case +# [x1_s6ht 1] of x0_s6hu {
+                        __DEFAULT ->
+                          let {
+                            n_s6hv :: [GHC.Types.Int] =
+                              \u []
+                                case ==# [x1_s6ht y_s6hp] of sat_s6hw {
+                                  __DEFAULT ->
+                                    case tagToEnum# [sat_s6hw] of _ {
+                                      GHC.Types.False ->
+                                        case +# [x1_s6ht 1] of sat_s6hy {
+                                          __DEFAULT -> go_s6hs sat_s6hy;
+                                        };
+                                      GHC.Types.True -> [] [];
+                                    };
+                                };
+                          }
+                          in case ># [x0_s6hu y_s6hp] of sat_s6hz {
+                               __DEFAULT ->
+                                 case tagToEnum# [sat_s6hz] of _ {
+                                   GHC.Types.False ->
+                                     let {
+                                       go1_s6hB :: GHC.Prim.Int# -> [GHC.Types.Int] =
+                                         \r [x2_s6hC]
+                                           let {
+                                             sat_s6hI :: [GHC.Types.Int] =
+                                               \u []
+                                                 case ==# [x2_s6hC y_s6hp] of sat_s6hF {
+                                                   __DEFAULT ->
+                                                     case tagToEnum# [sat_s6hF] of _ {
+                                                       GHC.Types.False ->
+                                                         case +# [x2_s6hC 1] of sat_s6hH {
+                                                           __DEFAULT -> go1_s6hB sat_s6hH;
+                                                         };
+                                                       GHC.Types.True -> n_s6hv;
+                                                     };
+                                                 };
+                                           }
+                                           in case +# [x1_s6ht x2_s6hC] of sat_s6hD {
+                                                __DEFAULT ->
+                                                  let {
+                                                    sat_s6hE :: GHC.Types.Int = GHC.Types.I#! [sat_s6hD];
+                                                  }
+                                                  in : [sat_s6hE sat_s6hI];
+                                              };
+                                     }
+                                     in go1_s6hB x0_s6hu;
+                                   GHC.Types.True -> n_s6hv;
+                                 };
+                             };
+                      };
+                }
+                in case go_s6hs 1 of sat_s6hJ {
+                     __DEFAULT -> Data.List.sum_$ssum1 sat_s6hJ;
+                   };
+              GHC.Types.True -> lvl_r6gy;
+            };
+        };
+    };
