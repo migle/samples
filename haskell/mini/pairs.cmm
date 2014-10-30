@@ -1,0 +1,160 @@
+// vim: ft=c
+
+[section "data" {
+     $wpairs_closure:
+         const $wpairs_info;
+ },
+ fTail_entry() //  [R1]
+         { info_tbl: [(c6qx, label: fTail_info rep:HeapRep 1 ptrs 2 nonptrs { Thunk })]
+           stack_info: arg_space: 8 updfr_space: Just 8
+         }
+     {offset
+       c6qx:
+           if ((Sp + -16) < SpLim) goto c6qG; else goto c6qH;
+       c6qG:
+           R1 = R1;
+           call (stg_gc_enter_1)(R1) args: 8, res: 0, upd: 8;
+       c6qH:
+           I64[Sp - 16] = stg_upd_frame_info;
+           P64[Sp - 8] = R1;
+           _s6bK::I64 = I64[R1 + 32];
+           if (_s6bK::I64 == I64[R1 + 24]) goto c6qE; else goto c6qF;
+       c6qE:
+           R1 = []_closure+1;
+           Sp = Sp - 16;
+           call (P64[Sp])(R1) args: 24, res: 0, upd: 24;
+       c6qF:
+           R2 = _s6bK::I64 + 1;
+           R1 = P64[R1 + 16];
+           Sp = Sp - 16;
+           call f_info(R2, R1) args: 24, res: 0, upd: 24;
+     }
+ },
+ gTail_entry() //  [R1]
+         { info_tbl: [(c6r1, label: gTail_info rep:HeapRep 2 ptrs 2 nonptrs { Thunk })]
+           stack_info: arg_space: 8 updfr_space: Just 8
+         }
+     {offset
+       c6r1:
+           if ((Sp + -16) < SpLim) goto c6ra; else goto c6rb;
+       c6ra:
+           R1 = R1;
+           call (stg_gc_enter_1)(R1) args: 8, res: 0, upd: 8;
+       c6rb:
+           I64[Sp - 16] = stg_upd_frame_info;
+           P64[Sp - 8] = R1;
+           _s6bU::I64 = I64[R1 + 40];
+           if (_s6bU::I64 == I64[R1 + 32]) goto c6r8; else goto c6r9;
+       c6r8:
+           R1 = P64[R1 + 16] & (-8);
+           Sp = Sp - 16;
+           call (I64[R1])(R1) args: 24, res: 0, upd: 24;
+       c6r9:
+           R2 = _s6bU::I64 + 1;
+           R1 = P64[R1 + 24];
+           Sp = Sp - 16;
+           call g_info(R2, R1) args: 24, res: 0, upd: 24;
+     }
+ },
+ g_entry() //  [R2, R1]
+         { info_tbl: [(c6rh, label: g_info rep:HeapRep 2 ptrs 1 nonptrs { Fun {arity: 1 fun_type: ArgSpec 4} })]
+           stack_info: arg_space: 8 updfr_space: Just 8
+         }
+     {offset
+       c6rh:
+           Hp = Hp + 112;
+           if (Hp > HpLim) goto c6rl; else goto c6rk;
+       c6rl:
+           HpAlloc = 112;
+           R2 = R2;
+           R1 = R1;
+           call (stg_gc_fun)(R2, R1) args: 8, res: 0, upd: 8;
+       c6rk:
+           _s6bM::P64 = P64[R1 + 7];
+           _s6bS::P64 = P64[R1 + 15];
+           _s6bG::I64 = I64[R1 + 23];
+           I64[Hp - 104] = gTail_info;
+           P64[Hp - 88] = _s6bM::P64;
+           P64[Hp - 80] = R1;
+           I64[Hp - 72] = _s6bG::I64;
+           I64[Hp - 64] = R2;
+           I64[Hp - 56] = GHC.Types.I#_con_info;
+           I64[Hp - 48] = R2;
+           I64[Hp - 40] = (,)_con_info;
+           P64[Hp - 32] = _s6bS::P64;
+           P64[Hp - 24] = Hp - 55;
+           I64[Hp - 16] = :_con_info;
+           P64[Hp - 8] = Hp - 39;
+           P64[Hp] = Hp - 104;
+           R1 = Hp - 14;
+           call (P64[Sp])(R1) args: 8, res: 0, upd: 8;
+     }
+ },
+ f_entry() //  [R2, R1]
+         { info_tbl: [(c6rm, label: f_info rep:HeapRep 1 nonptrs { Fun {arity: 1 fun_type: ArgSpec 4} })]
+           stack_info: arg_space: 8 updfr_space: Just 8
+         }
+     {offset
+       c6rm:
+           Hp = Hp + 88;
+           if (Hp > HpLim) goto c6rw; else goto c6rv;
+       c6rw:
+           HpAlloc = 88;
+           R2 = R2;
+           R1 = R1;
+           call (stg_gc_fun)(R2, R1) args: 8, res: 0, upd: 8;
+       c6rv:
+           _s6bG::I64 = I64[R1 + 7];
+           I64[Hp - 80] = fTail_info;
+           P64[Hp - 64] = R1;
+           I64[Hp - 56] = _s6bG::I64;
+           I64[Hp - 48] = R2;
+           _s6bL::I64 = R2 + 1;
+           _c6qr::P64 = Hp - 80;
+           if (%MO_S_Gt_W64(_s6bL::I64,
+                            _s6bG::I64)) goto c6rr; else goto c6rs;
+       c6rr:
+           Hp = Hp - 48;
+           R1 = _c6qr::P64 & (-8);
+           call (I64[R1])(R1) args: 8, res: 0, upd: 8;
+       c6rs:
+           I64[Hp - 40] = GHC.Types.I#_con_info;
+           I64[Hp - 32] = R2;
+           I64[Hp - 24] = g_info;
+           P64[Hp - 16] = _c6qr::P64;
+           P64[Hp - 8] = Hp - 39;
+           I64[Hp] = _s6bG::I64;
+           R2 = _s6bL::I64;
+           R1 = Hp - 23;
+           call g_info(R2, R1) args: 8, res: 0, upd: 8;
+     }
+ },
+ $wpairs_entry() //  [R2]
+         { info_tbl: [(c6rx, label: $wpairs_info rep:HeapRep static { Fun {arity: 1 fun_type: ArgSpec 4} })]
+           stack_info: arg_space: 8 updfr_space: Just 8
+         }
+     {offset
+       c6rx:
+           Hp = Hp + 16;
+           if (Hp > HpLim) goto c6rH; else goto c6rG;
+       c6rH:
+           HpAlloc = 16;
+           R2 = R2;
+           R1 = $wpairs_closure;
+           call (stg_gc_fun)(R2, R1) args: 8, res: 0, upd: 8;
+       c6rG:
+           if (%MO_S_Gt_W64(1, R2)) goto c6rC; else goto c6rD;
+       c6rC:
+           Hp = Hp - 16;
+           R1 = []_closure+1;
+           call (P64[Sp])(R1) args: 8, res: 0, upd: 8;
+       c6rD:
+           I64[Hp - 8] = f_info;
+           I64[Hp] = R2;
+           R2 = 1;
+           R1 = Hp - 7;
+           call f_info(R2, R1) args: 8, res: 0, upd: 8;
+     }
+ }]
+
+
