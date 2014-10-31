@@ -114,22 +114,22 @@ stgPairs n = case n of
 stgPairs' :: Int# -> [(Int, Int)]
 stgPairs' n =
   case 1# ># n of
-    nlt1@_ ->
+    nlt1 ->
       case (tagToEnum# nlt1)::Bool of
         True -> []
         False ->
           let f :: Int# -> [(Int, Int)]
               f i = case i +# 1# of
-                      jFirst@_ ->
+                      jFirst ->
                         let fTail :: [(Int, Int)]
                             fTail = case i ==# n of
-                                      ieqn@_ ->
+                                      ieqn ->
                                         case (tagToEnum# ieqn)::Bool of
                                           True -> []
                                           False -> case i +# 1# of
-                                                     iSucc@_ -> f iSucc
+                                                     iSucc -> f iSucc
                         in case jFirst ># n of
-                             jgtn@_ ->
+                             jgtn ->
                                case (tagToEnum# jgtn)::Bool of
                                  True -> fTail
                                  False ->
@@ -138,11 +138,11 @@ stgPairs' n =
                                    in let g :: Int# -> [(Int, Int)]
                                           g j = let gTail :: [(Int, Int)]
                                                     gTail = case j ==# n of
-                                                              jeqn@_ ->
+                                                              jeqn ->
                                                                 case (tagToEnum# jeqn)::Bool of
                                                                   True -> fTail
                                                                   False -> case j +# 1# of
-                                                                             jSucc@_ -> g jSucc
+                                                                             jSucc -> g jSucc
                                                 in let jBox :: Int
                                                        jBox = I# j
                                                    in let pair :: (Int, Int)
@@ -157,18 +157,18 @@ rePairs n = case 1 > n of
               True -> []
               False ->
                 let f !i = case i + 1 of
-                             jFirst@_ ->
+                             jFirst ->
                                let fTail = case i == n of
                                              True -> []
                                              False -> case i + 1 of
-                                                        iSucc@_ -> f iSucc
+                                                        iSucc -> f iSucc
                                in case jFirst > n of
                                     True -> fTail
                                     False ->
                                       let g !j = let gTail = case j == n of
                                                                True -> fTail
                                                                False -> case j + 1 of
-                                                                          jSucc@_ -> g jSucc
+                                                                          jSucc -> g jSucc
                                                  in let pair = (i, j)
                                                     in pair : gTail
                                       in g jFirst
@@ -182,37 +182,37 @@ stgSums n = case n of
 stgSums' :: Int# -> [Int]
 stgSums' n =
   case 1# ># n of
-    nlt1@_ ->
+    nlt1 ->
       case (tagToEnum# nlt1)::Bool of
         True -> []
         False ->
           let f :: Int# -> [Int]
               f i = case i +# 1# of
-                      jFirst@_ ->
+                      jFirst ->
                         let fTail :: [Int]
                             fTail = case i ==# n of
-                                      ieqn@_ ->
+                                      ieqn ->
                                         case (tagToEnum# ieqn)::Bool of
                                           True -> []
                                           False -> case i +# 1# of
-                                                     iSucc@_ -> f iSucc
+                                                     iSucc -> f iSucc
                         in case jFirst ># n of
-                             jgtn@_ ->
+                             jgtn ->
                                case (tagToEnum# jgtn)::Bool of
                                  True -> fTail
                                  False ->
                                    let g :: Int# -> [Int]
                                        g j = let gTail :: [Int]
                                                  gTail = case j ==# n of
-                                                           jeqn@_ ->
+                                                           jeqn ->
                                                              case (tagToEnum# jeqn)::Bool of
                                                                True -> fTail
                                                                False -> case j +# 1# of
-                                                                          jSucc@_ -> g jSucc
+                                                                          jSucc -> g jSucc
                                              in case i +# j of
-                                                  ipj@_ -> let box :: Int
-                                                               box = I# ipj
-                                                           in box : gTail
+                                                  ipj -> let box :: Int
+                                                             box = I# ipj
+                                                         in box : gTail
                                    in g jFirst
           in f 1#
 
@@ -222,20 +222,20 @@ reSums n = case 1 > n of
              True -> []
              False ->
                let f !i = case i + 1 of
-                            jFirst@_ ->
+                            jFirst ->
                               let fTail = case i == n of
                                             True -> []
                                             False -> case i + 1 of
-                                                       iSucc@_ -> f iSucc
+                                                       iSucc -> f iSucc
                               in case jFirst > n of
                                    True -> fTail
                                    False ->
                                      let g !j = let gTail = case j == n of
                                                               True -> fTail
                                                               False -> case j + 1 of
-                                                                         jSucc@_ -> g jSucc
+                                                                         jSucc -> g jSucc
                                                 in case i + j of
-                                                     ipj@_ -> ipj : gTail
+                                                     ipj -> ipj : gTail
                                      in g jFirst
                in f 1
 
