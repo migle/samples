@@ -1,6 +1,8 @@
 # Miguel Ramos, 2014.
-SOURCES = pairs.hs pairs-distilled.hs tak.hs
-TARGETS = pairs tak
+SOURCES = fib.hs pairs.hs tak.hs
+TARGETS = fib pairs tak
+
+HC_OPTS =
 
 all : $(TARGETS)
 stg : $(SOURCES:%.hs=%.dump-stg)
