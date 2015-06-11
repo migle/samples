@@ -48,8 +48,8 @@ stgNaive' =
 {-# NOINLINE tail #-}
 tail :: Int -> Int
 tail = tail' 0 1
-  where tail' a _ 0 = a
-        tail' a b n = a + b `seq` tail' b (a + b) (n - 1)
+  where tail' a b 0 = b `seq` a
+        tail' a b n = tail' b (a + b) (n - 1)
 
 {-# NOINLINE stgTail #-}
 stgTail :: Int -> Int

@@ -2,7 +2,7 @@
 SOURCES = fib.hs pairs.hs tak.hs
 TARGETS = fib pairs tak
 
-HC_OPTS =
+#HC_OPTS =
 
 all : $(TARGETS)
 stg : $(SOURCES:%.hs=%.dump-stg)
