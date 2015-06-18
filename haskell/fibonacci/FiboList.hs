@@ -1,22 +1,33 @@
--- Miguel Ramos, 2013-2014.
-{-# LANGUAGE ParallelListComp #-}
+-- Miguel Ramos, 2013-2015.
 
-module FiboList (fib, fibs) where
+module FiboList (fib, fibs, fib', fibs') where
 
-fib n = fibs !! n
+positive a b = let xs = positive a b
+               in a : b : zipWith (+) xs (tail xs)
+negative a b = let xs = negative a b
+               in b : a : zipWith (-) xs (tail xs)
 
--- fibs = 0 : 1 : [ a + b | (a, b) <- zip fibs (tail fibs) ]
--- fibs = 0 : 1 : [ a + b | a <- fibs | b <- tail fibs ]
--- fibs = 0 : 1 : do
---     (a, b) <- zip fibs (tail fibs)
---     return $! a + b
--- fibs = 0 : 1 : [ n | n <- zipWith (+) fibs (tail fibs) ]
--- fibs = 0 : 1 : zipWith (+) fibs (tail fibs)
-fibs = 0 : 1 : do
-    n <- zipWith (+) fibs (tail fibs)
-    return $! n
+fibs = positive
+fib a b n = if n >= 0 then
+               positive a b !! n
+            else
+               negative a b !! (1 - n)
 
--- fibs = 0 : 1 : zipAdd fibs (tail fibs)
---     where zipAdd (a:as) (b:bs) = let c = a + b
---                                  in c `seq` c : zipAdd as bs
---           zipAdd _ _           = []
+positive' a b = a `seq` b `seq` a : b : do
+  let xs = positive' a b
+  n <- zipWith (+) xs (tail xs)
+  return $! n
+  
+negative' a b = a `seq` b `seq` b : a : do
+  let xs = negative' a b
+  n <- zipWith (-) xs (tail xs)
+  return $! n
+
+fibs' = positive'
+fib' a b n = if n >= 0 then
+                nth' (positive' a b) n
+             else
+                nth' (negative' a b) (1 - n)
+
+nth' (x:_)  0 = x
+nth' (x:xs) n = x `seq` nth' xs (n - 1)
