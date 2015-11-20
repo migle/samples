@@ -1,6 +1,6 @@
 # Miguel Ramos, 2014-2015.
-SOURCES = fact.hs fib.hs pairs.hs pseudo.hs tak.hs
-TARGETS = fact fib pairs pseudo tak
+SOURCES = pairs.hs
+TARGETS = pairs
 
 #HC_OPTS =
 
