@@ -1,0 +1,34 @@
+# Miguel Ramos, 2015.
+
+D := { fib[n] };
+D0 := { fib[0] };
+D1 := { fib[1] };
+Dn := D - D0 - D1;
+
+print Dn;
+
+M := { fib[n] -> fib[n - 1] } * Dn
+   + { fib[n] -> fib[n - 2] } * Dn;
+
+print M;
+
+C := M^+;
+
+print C;
+
+T := C[0];
+q := card(T);
+
+print q;
+
+S0 := [n] -> { fib[n] : n >= 0 };
+S := S0 + T(S0);
+
+print S;
+
+d := M^-1;
+Th := schedule S respecting d minimizing {};
+
+print Th;
+
+codegen Th;
