@@ -1,16 +1,21 @@
 -- Miguel Ramos, 2015.
+{-# LANGUAGE MultiParamTypeClasses #-}
 
 module Level0 where
 
--- There is a VectorSpace involving types v and s, if both (v s), the vector type and s, the scalar
--- type, are instances of Num and scalar multiplication is defined over (v s) and s.
-class (Num s, Num (v s)) => VectorSpace v s | v -> s where
+-- There is a VectorSpace involving types v and s, v being the vector type and
+-- s the scalar field over which v is defined, if both (v s) and s are
+-- instances of Num and scalar multiplication is defined over v and s.
+class (Num s, Num (v s)) => VectorSpace v s where
     scal :: s -> v s -> v s
     axpy :: s -> v s -> v s -> v s
 
--- VectorSpace v s is additionally an InnerProductSpace if an inner product is defined over (v s),
--- if s is an instance of Floating (with sqrt defined) and an associated norm is defined.
-class (VectorSpace v s, Floating s) => InnerProductSpace v s | v -> s where
-    dot :: v s -> v s -> s
+-- VectorSpace v s is additionally a NormedVectorSpace if a norm is defined
+-- over (v s).
+class VectorSpace v s => NormedVectorSpace v s where
     norm :: v s -> s
-    norm u = sqrt (dot u u)
+
+-- VectorSpace v s is additionally an InnerProductSpace if an inner product is
+-- defined over (v s).
+class VectorSpace v s => InnerProductSpace v s where
+    dot :: v s -> v s -> s
